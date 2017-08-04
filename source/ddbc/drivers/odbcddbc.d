@@ -1231,6 +1231,10 @@ version (USE_ODBC)
 
             ColumnMetadataItem[] items;
             items.length = stmt.cols.length;
+
+            if(stmt.cols.length == 0) {
+                _hasRows = false;
+            }
    
             foreach (i, col; stmt.cols)
             {
@@ -1325,6 +1329,9 @@ version (USE_ODBC)
             lock();
             scope (exit)
                 unlock();
+
+            if(!_hasRows)
+                return false;
 
             if (!stmt.fetch())
                 return false;
