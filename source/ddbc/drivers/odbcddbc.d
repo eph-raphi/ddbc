@@ -783,9 +783,10 @@ version (USE_ODBC)
                     if (isArray!(T) && !is(TypeToCIdentifier!(T) == void))
             {
                 T val;
-                int len = 0;
+                int len = 4;
+                val.lenth = len;
 
-                checkstmt!SQLGetData(stmt, this.nr, TypeToCIdentifier!(T), null, 0, &len);
+                checkstmt!SQLGetData(stmt, this.nr, TypeToCIdentifier!(T), val.ptr, 0, &len);
 
                 if (len == SQL_NULL_DATA)
                     return Variant();
