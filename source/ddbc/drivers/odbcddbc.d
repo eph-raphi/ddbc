@@ -784,7 +784,7 @@ version (USE_ODBC)
             {
                 T val;
                 int len = 4;
-                val.lenth = len;
+                val.length = len;
 
                 checkstmt!SQLGetData(stmt, this.nr, TypeToCIdentifier!(T), val.ptr, 0, &len);
 
